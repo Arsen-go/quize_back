@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -12,11 +13,34 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "resolveJsonModule": true,
     "paths": {
       "@/*": ["src/*"],
-      "@Schema/*": ["src/schema/*"],
-      "@Service/*": ["src/modules/*"],
-      "@Module/*": ["src/modules/*"]
+      "@Common/*": ["src/common/*"],
+      "@Constants/*": ["src/constants/*"],
+      "@Core/*": ["src/core/*"],
+      "@DatabaseModels/*": ["src/core/database/models/*"],
+      "@Database/*": ["src/core/database/*"],
+      "@Exception/*": ["src/exceptions/*"],
+      "@Middlewares/*": ["src/middlewares/*"],
+      "@Plugins/*": ["src/plugins/*"],
+      "@Scalars/*": ["src/scalars/*"],
+      "@Validations/*": ["src/validations/*"],
+      "@Decorators/*": ["src/decorators/*"],
+      "@Filters/*": ["src/filters/*"],
+      "@Gateway/*": ["src/gateway/*"],
+      "@Guards/*": ["src/guards/*"],
+      "@Inputs/*": ["src/inputs/*"],
+      "@Interceptors/*": ["src/interceptors/*"],
+      "@Models/*": ["src/models/*"],
+      "@Modules/*": ["src/modules/*"],
+      "@Pipes/*": ["src/pipes/*"],
+      "@Utils/*": ["src/utils/*"]
     }
   }
 }
