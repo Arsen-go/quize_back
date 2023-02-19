@@ -13,31 +13,31 @@ export class UserResolver {
     return 'Hello World!';
   }
 
-  @Query((returns) => [User])
-  users(): User[] {
-    return this.userService.findAll();
-  }
-
-  @Query((returns) => User)
-  user(@Args('id') id: number): User {
+  @Query(() => User)
+  async user(@Args('id') id: number) {
     return this.userService.findOne(id);
   }
 
-  @Mutation((returns) => User)
-  createUser(@Args('user') user: CreateUserInput): Number {
-    return this.userService.create(user);
+  @Query(() => [User])
+  async users() {
+    return this.userService.findAll();
   }
 
-  @Mutation((returns) => User)
-  updateUser(
+  @Mutation(() => User)
+  async createUser(@Args('input') input: CreateUserInput) {
+    return this.userService.create(input);
+  }
+
+  @Mutation(() => User)
+  async updateUser(
     @Args('id') id: number,
-    @Args('user') user: CreateUserInput,
-  ): User {
-    return this.userService.update(id, user);
+    @Args('input') input: CreateUserInput,
+  ) {
+    return this.userService.update(id, input);
   }
 
-  @Mutation((returns) => User)
-  deleteUser(@Args('id') id: number): User {
+  @Mutation(() => User)
+  async deleteUser(@Args('id') id: number) {
     return this.userService.delete(id);
   }
 }
