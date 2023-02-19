@@ -41,34 +41,6 @@ class EnvironmentVariables {
 
   @IsNumber()
   MYSQL_PORT: number;
-
-  @IsString()
-  @IsNotEmpty()
-  CLIENT_ID: string;
-
-  @IsString()
-  @IsNotEmpty()
-  APP_KEY: string;
-
-  @IsString()
-  @IsNotEmpty()
-  CLIENT_SECRET: string;
-
-  @IsString()
-  @IsNotEmpty()
-  CALLBACK_URL: string;
-
-  @IsString()
-  @IsNotEmpty()
-  GENERATE_TOKEN_URL: string;
-
-  @IsString()
-  @IsNotEmpty()
-  GET_ME: string;
-
-  @IsString()
-  @IsNotEmpty()
-  PRODUCT_SWITCHER: string;
 }
 
 export function validate(config: Record<string, unknown>) {

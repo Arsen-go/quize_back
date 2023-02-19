@@ -3,7 +3,10 @@ import { Column, DataType, Model } from 'sequelize-typescript';
 
 @ObjectType()
 export class BaseModel<T, G> extends Model<T, G> {
-  @Field()
+  @Field(() => Number, {
+    nullable: false,
+    description: 'Unique identifier for this model.',
+  })
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
@@ -12,13 +15,26 @@ export class BaseModel<T, G> extends Model<T, G> {
   })
   id: number;
 
-  @Field()
-  @Column({ type: DataType.DATE })
+  @Field(() => Date, {
+    description: 'This is the date when this model is created.',
+    nullable: false,
+  })
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+    defaultValue: new Date(),
+  })
   createdAt: Date;
 
-  @Field()
-  @Column({ type: DataType.DATE })
+  @Field(() => Date, {
+    description:
+      'Every action with this model will cause a change of this value',
+    nullable: false,
+  })
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+    defaultValue: new Date(),
+  })
   updatedAt: Date;
-
-  queryCount: number;
 }

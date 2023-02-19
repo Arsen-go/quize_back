@@ -1,3 +1,3 @@
-import { MemberModule } from './member/member.module';
+import { UserModule } from './user/user.module';
 
-export default [MemberModule];
+export default [UserModule];
