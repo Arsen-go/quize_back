@@ -1,71 +1,36 @@
-// import { OrgSettings } from '@/core/database/models/org-settings.model';
-// import {
-//   Injectable,
-//   CanActivate,
-//   ExecutionContext,
-//   UnauthorizedException,
-// } from '@nestjs/common';
-// import { GqlExecutionContext } from '@nestjs/graphql';
-// import * as fetch from 'node-fetch';
-// import { setupUserLogin } from '@Guards/utils/setup-user-login';
-// import { Member } from '@/core/database/models/member.model';
-// import { getMemberColor } from '@Constants/people-colors';
+import { GqlExecutionContext } from '@nestjs/graphql';
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
-// @Injectable()
-// export class AuthGuard implements CanActivate {
-//   async canActivate(context: ExecutionContext): Promise<boolean> {
-//     const req = GqlExecutionContext.create(context).getContext()?.req;
-//     req.startTime = Date.now();
+@Injectable()
+export class AuthGuard implements CanActivate {
+  constructor(
+    private readonly jwtService: JwtService, // private readonly userService: UserService,
+  ) {}
 
-//     return fetch(`${process.env.GET_ME}`, {
-//       headers: {
-//         Accept: 'application/json',
-//         'Content-Type': 'application/json',
-//         Authorization: `${req.headers?.authorization}`,
-//       },
-//     })
-//       .then(async (res) => {
-//         if (!res) throw new UnauthorizedException('Unauthorized');
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const req = GqlExecutionContext.create(context).getContext()?.req;
 
-//         const user = await res.json();
+    const token = req.headers.authorization?.split(' ')?.[1];
+    if (!token) {
+      throw new UnauthorizedException('Unauthorized');
+    }
 
-//         if (!user?.data) {
-//           throw new UnauthorizedException('Unauthorized');
-//         }
+    const decoded = await this.jwtService.verifyAsync(token, {
+      secret: 'm',
+    });
 
-//         req.user = { ...user.data, apiToken: user.apiToken };
+    if (!decoded) {
+      throw new UnauthorizedException('Unauthorized');
+    }
 
-//         await Member.findOne({
-//           where: {
-//             userId: req.user.userID,
-//           },
-//         }).then((row) => {
-//           if (row)
-//             return row.update({
-//               firstName: user.data.firstName,
-//               lastName: user.data.lastName,
-//               emailAddress: user.data.emailAddress,
-//               online: true,
-//             });
+    req.currentUser = decoded;
 
-//           return Member.create({
-//             userId: user.data.userID,
-//             firstName: user.data.firstName,
-//             lastName: user.data.lastName,
-//             emailAddress: user.data.emailAddress,
-//             online: true,
-//             color: getMemberColor(),
-//           });
-//         });
-
-//         if (user.data.orgID) {
-//           setupUserLogin({ user: user.data }).catch(console.error);
-//         }
-
-//         return true;
-//       })
-//       .catch(() => {
-//         throw new UnauthorizedException('Unauthorized');
-//       });
-//   }
-// }
+    return true;
+  }
+}

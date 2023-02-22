@@ -1,6 +1,6 @@
+import { User } from '@/core/database/models/user.model';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -14,18 +14,25 @@ export class AuthService {
     return null;
   }
 
-  async login(user: any) {
-    const payload = { username: user.username, sub: user.id };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
-  }
+  async login({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }): Promise<string> {
+    const user = await User.findOne({
+      where: {
+        email,
+      },
+    });
+    if (!user) throw new Error('Password or login is wrong.');
 
-  async hashPassword(password: string): Promise<string> {
-    return bcrypt.hash(password, 10);
-  }
+    const isPasswordCorrect = await user.checkPassword(password);
+    if (!isPasswordCorrect) throw new Error('Password or login is wrong.');
 
-  async comparePassword(password: string, hash: string): Promise<boolean> {
-    return bcrypt.compare(password, hash);
+    const payload = { email: user.email, id: user.id };
+
+    return this.jwtService.sign(payload, { secret: 'm' });
   }
 }

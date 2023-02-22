@@ -1,19 +1,11 @@
-import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { JwtModule } from '@nestjs/jwt';
-import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
+import { AuthService } from './auth.service';
+import { JwtModule } from '@nestjs/jwt';
+import { Module } from '@nestjs/common';
 
 @Module({
-  imports: [
-    JwtModule.register({
-      secret: 'secret', // Replace this with your own secret key
-      signOptions: { expiresIn: '60s' },
-    }),
-    GraphQLModule.forRoot({
-      autoSchemaFile: true,
-    }),
-  ],
-  providers: [AuthService, AuthResolver],
+  imports: [JwtModule],
+  providers: [AuthResolver, AuthService],
+  exports: [AuthService],
 })
-export class AppModule {}
+export class AuthModule {}

@@ -1,11 +1,10 @@
 import { User } from '@/core/database/models/user.model';
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
 import { CreateUserInput } from './inputs/create-user.input';
 
 @Injectable()
 export class UserService {
-  async findOne(id: number): Promise<User> {
+  async getUser({ id }: { id: number }): Promise<User> {
     return User.findByPk(id);
   }
 
@@ -13,7 +12,7 @@ export class UserService {
     return User.findAll();
   }
 
-  async create(input: CreateUserInput): Promise<User> {
+  async create({ input }: { input: CreateUserInput }): Promise<User> {
     return User.create(input);
   }
 

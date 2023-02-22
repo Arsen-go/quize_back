@@ -2,6 +2,8 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { User } from '@/core/database/models/user.model';
 import { UserService } from './user.service';
 import { CreateUserInput } from './inputs/create-user.input';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@/guards/auth.guard';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -13,19 +15,20 @@ export class UserResolver {
     return 'Hello World!';
   }
 
+  @Mutation(() => User)
+  async createUser(@Args('input') input: CreateUserInput): Promise<User> {
+    return this.userService.create({ input });
+  }
+
+  @UseGuards(AuthGuard)
   @Query(() => User)
-  async user(@Args('id') id: number) {
-    return this.userService.findOne(id);
+  async getUser(@Args('id') id: number) {
+    return this.userService.getUser({ id });
   }
 
   @Query(() => [User])
   async users() {
     return this.userService.findAll();
-  }
-
-  @Mutation(() => User)
-  async createUser(@Args('input') input: CreateUserInput) {
-    return this.userService.create(input);
   }
 
   @Mutation(() => User)

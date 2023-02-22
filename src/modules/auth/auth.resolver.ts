@@ -1,5 +1,6 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
+import { User } from '@/core/database/models/user.model';
 
 @Resolver()
 export class AuthResolver {
@@ -7,13 +8,9 @@ export class AuthResolver {
 
   @Mutation(() => String)
   async login(
-    @Args('username') username: string,
+    @Args('email') email: string,
     @Args('password') password: string,
-  ) {
-    const user = await this.authService.validateUser(username, password);
-    if (!user) {
-      throw new Error('Invalid username or password');
-    }
-    return this.authService.login(user);
+  ): Promise<string> {
+    return this.authService.login({ email, password });
   }
 }

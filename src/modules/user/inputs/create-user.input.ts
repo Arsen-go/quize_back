@@ -5,11 +5,8 @@ import { IsEmail } from 'class-validator';
 export class CreateUserInput {
   @IsEmail()
   @Field(() => String)
-  emailAddress: string;
+  email: string;
 
   @Field(() => String)
-  firstName: string;
-
-  @Field(() => String, { nullable: true })
-  lastName: string;
+  password: string;
 }

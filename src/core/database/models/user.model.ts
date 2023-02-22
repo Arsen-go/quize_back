@@ -1,12 +1,13 @@
 import { BaseModel } from './base.model';
-import { Column, DataType, Table } from 'sequelize-typescript';
+import { BeforeCreate, Column, DataType, Table } from 'sequelize-typescript';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { generateRandomString } from '@/guards/utils/generate-random-string';
+import * as bcrypt from 'bcryptjs';
 
 interface CreateUserAttr {
   email: string;
   password: string;
-  name: string;
+  name?: string;
 }
 
 @Table({
@@ -44,7 +45,16 @@ export class User extends BaseModel<User, CreateUserAttr> {
   })
   name: string;
 
-  @Field(() => String)
   @Column({ type: DataType.STRING })
   password: string;
+
+  @BeforeCreate
+  static hashPassword(instance: User) {
+    const hashedPassword = bcrypt.hashSync(instance.password, 10);
+    instance.password = hashedPassword;
+  }
+
+  async checkPassword(password: string): Promise<boolean> {
+    return await bcrypt.compare(password, this.password);
+  }
 }
