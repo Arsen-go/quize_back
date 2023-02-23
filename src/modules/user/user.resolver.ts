@@ -9,12 +9,6 @@ import { AuthGuard } from '@/guards/auth.guard';
 export class UserResolver {
   constructor(private userService: UserService) {}
 
-  @Query(() => String)
-  sayHello(): string {
-    console.log('Sss');
-    return 'Hello World!';
-  }
-
   @Mutation(() => User)
   async createUser(@Args('input') input: CreateUserInput): Promise<User> {
     return this.userService.create({ input });
