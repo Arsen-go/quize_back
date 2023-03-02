@@ -1,30 +1,33 @@
 'use strict';
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('questions', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER,
-      },
-      text: {
+        autoIncrement: true,
         allowNull: false,
+        primaryKey: true,
+      },
+      questionText: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       options: {
-        allowNull: false,
         type: Sequelize.JSON,
+        allowNull: false,
       },
       correctAnswer: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.STRING,
       },
       quizId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'quizzes',
+          model: {
+            tableName: 'quizzes',
+          },
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -42,6 +45,7 @@ module.exports = {
       },
     });
   },
+
   down: async (queryInterface) => {
     await queryInterface.dropTable('questions');
   },

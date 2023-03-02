@@ -10,32 +10,46 @@ import {
 import { Quiz } from './quiz.model';
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 
-@Table({ timestamps: true })
+interface CreateQuestionAttributes {
+  questionText: string;
+  options: string[];
+  correctAnswer: number;
+  quizId: number;
+}
+
+// ! -> variable or property is non-null
+
+@Table({ tableName: 'questions', timestamps: true })
 @ObjectType()
-export class Question extends Model<Question> {
+export class Question extends Model<Question, CreateQuestionAttributes> {
   @Field(() => ID)
   @Column({
-    primaryKey: true,
+    type: DataType.INTEGER,
     autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
   })
   id!: number;
 
   @Field(() => String)
   @Column({ type: DataType.STRING })
-  text!: string;
+  questionText!: string;
 
   @Field(() => [String])
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.JSON })
   options!: string[];
 
-  @Field(() => String)
-  @Column({ type: DataType.STRING })
-  correctAnswer!: string;
+  @Field(() => Number)
+  @Column({ type: DataType.INTEGER })
+  correctAnswer!: number;
 
+  @Field(() => Number)
   @ForeignKey(() => Quiz)
   @Column({ type: DataType.INTEGER })
   quizId!: number;
 
-  @BelongsTo(() => Quiz)
+  @BelongsTo(() => Quiz, {
+    foreignKey: 'quizId',
+  })
   quiz!: Quiz;
 }

@@ -1,14 +1,21 @@
 import { Table, Column, Model, HasMany, DataType } from 'sequelize-typescript';
-import { Question } from './question.model';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+
+interface CreateQuizAttributes {
+  name: string;
+  description: string | null;
+  duration?: number | null;
+}
 
 @Table({ tableName: 'quizzes', timestamps: true })
 @ObjectType()
-export class Quiz extends Model<Quiz> {
+export class Quiz extends Model<Quiz, CreateQuizAttributes> {
   @Field(() => ID)
   @Column({
-    primaryKey: true,
+    type: DataType.INTEGER,
     autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
   })
   id!: number;
 
@@ -16,14 +23,11 @@ export class Quiz extends Model<Quiz> {
   @Column({ type: DataType.STRING })
   name!: string;
 
-  @Field(() => String)
-  @Column({ type: DataType.STRING })
-  description!: string;
+  @Field(() => String, { nullable: true })
+  @Column({ type: DataType.STRING, allowNull: true })
+  description?: string | null;
 
-  @Field(() => String)
-  @Column({ type: DataType.INTEGER })
-  duration: number;
-
-  @HasMany(() => Question)
-  questions!: Question[];
+  @Field(() => String, { nullable: true })
+  @Column({ type: DataType.INTEGER, allowNull: true })
+  duration?: number | null;
 }

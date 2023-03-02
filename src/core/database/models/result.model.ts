@@ -11,13 +11,21 @@ import { Quiz } from './quiz.model';
 import { User } from './user.model';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
-@Table({ timestamps: true })
+interface CreateResultAttributes {
+  quizId: number;
+  userId: number;
+  score: number;
+}
+
+@Table({ tableName: 'results', timestamps: true })
 @ObjectType()
-export class Result extends Model<Result> {
+export class Result extends Model<Result, CreateResultAttributes> {
   @Field(() => ID)
   @Column({
-    primaryKey: true,
+    type: DataType.INTEGER,
     autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
   })
   id!: number;
 
@@ -25,6 +33,7 @@ export class Result extends Model<Result> {
   @Column({ type: DataType.INTEGER })
   quizId!: number;
 
+  @Field(() => Quiz)
   @BelongsTo(() => Quiz)
   quiz!: Quiz;
 
@@ -32,10 +41,11 @@ export class Result extends Model<Result> {
   @Column({ type: DataType.INTEGER })
   userId!: number;
 
+  @Field(() => User)
   @BelongsTo(() => User)
   user!: User;
 
-  @Field()
+  @Field(() => Number)
   @Column({ type: DataType.INTEGER })
   score!: number;
 }
