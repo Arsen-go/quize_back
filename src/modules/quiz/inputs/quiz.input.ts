@@ -1,13 +1,25 @@
 import { ObjectType, Field, ID, InputType } from '@nestjs/graphql';
 
 @InputType()
+class QuestionInput {
+  @Field(() => String)
+  questionText!: string;
+
+  @Field(() => [String])
+  options!: string[];
+
+  @Field(() => Number)
+  correctAnswer!: number;
+}
+
+@InputType()
 export class QuizInput {
-  @Field()
+  @Field(() => String)
   name!: string;
 
-  @Field()
+  @Field(() => String)
   description!: string;
 
-  @Field()
-  duration!: number;
+  @Field(() => [QuestionInput])
+  questions!: QuestionInput[];
 }

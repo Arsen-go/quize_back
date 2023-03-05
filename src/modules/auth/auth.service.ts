@@ -21,6 +21,8 @@ export class AuthService {
     email: string;
     password: string;
   }): Promise<string> {
+    console.log(email, password);
+
     const user = await User.findOne({
       where: {
         email,
@@ -33,6 +35,9 @@ export class AuthService {
 
     const payload = { email: user.email, id: user.id };
 
-    return this.jwtService.sign(payload, { secret: 'm' });
+    return this.jwtService.sign(payload, {
+      secret: 'm',
+      expiresIn: 1000000000,
+    });
   }
 }

@@ -1,19 +1,30 @@
 import { Quiz } from '@/core/database/models/quiz.model';
 import { Injectable } from '@nestjs/common';
 import { QuizInput } from './inputs/quiz.input';
+import { Question } from '@/core/database/models/question.model';
+import { User } from '@/core/database/models/user.model';
 
 @Injectable()
 export class QuizService {
-  async findAll(): Promise<Quiz[]> {
-    return Quiz.findAll({ include: [{ all: true }] });
-  }
+  async create({ data, user }: { data: QuizInput; user: User }): Promise<Quiz> {
+    const { description, name, questions } = data;
 
-  async findOne(id: number): Promise<Quiz | null> {
-    return Quiz.findByPk(id, { include: [{ all: true }] });
-  }
+    const quiz: Quiz = await Quiz.create({
+      description,
+      name,
+      ownerId: user.id,
+    });
 
-  async create(data: QuizInput): Promise<Quiz> {
-    return Quiz.create(data);
+    await Question.bulkCreate(
+      questions.map((q) => ({
+        correctAnswer: q.correctAnswer,
+        options: q.options,
+        questionText: q.questionText,
+        quizId: quiz.id,
+      })),
+    );
+
+    return quiz;
   }
 
   async update(id: number, data: QuizInput): Promise<Quiz | null> {
@@ -30,5 +41,18 @@ export class QuizService {
 
     await quiz.destroy();
     return true;
+  }
+
+  async getUserQuizzes({ user }): Promise<Quiz[]> {
+    console.log(user);
+    return Quiz.findAll({ include: [{ all: true }] });
+  }
+
+  async findOne(id: number): Promise<Quiz | null> {
+    return Quiz.findByPk(id, { include: [{ all: true }] });
+  }
+
+  async getQuizQuestions({ quizId }: { quizId: number }): Promise<Question[]> {
+    return Question.findAll({ where: { quizId } });
   }
 }

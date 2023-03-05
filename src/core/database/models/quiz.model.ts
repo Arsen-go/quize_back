@@ -1,7 +1,17 @@
-import { Table, Column, Model, HasMany, DataType } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  HasMany,
+  DataType,
+  BelongsTo,
+  ForeignKey,
+} from 'sequelize-typescript';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { User } from './user.model';
 
 interface CreateQuizAttributes {
+  ownerId: number;
   name: string;
   description: string | null;
   duration?: number | null;
@@ -18,6 +28,16 @@ export class Quiz extends Model<Quiz, CreateQuizAttributes> {
     primaryKey: true,
   })
   id!: number;
+
+  @Field(() => Number)
+  @ForeignKey(() => User)
+  @Column({ type: DataType.INTEGER })
+  ownerId!: number;
+
+  @BelongsTo(() => User, {
+    foreignKey: 'ownerId',
+  })
+  owner!: User;
 
   @Field(() => String)
   @Column({ type: DataType.STRING })

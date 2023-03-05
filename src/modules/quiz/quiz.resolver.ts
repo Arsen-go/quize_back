@@ -1,16 +1,28 @@
 import { Quiz } from '@/core/database/models/quiz.model';
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { QuizInput } from './inputs/quiz.input';
 import { QuizService } from './quiz.service';
 import { User } from '@/core/database/models/user.model';
+import { Question } from '@/core/database/models/question.model';
+import { CurrentUser } from '@/decorators/current-user.decorator';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@/guards/auth.guard';
 
 @Resolver(() => Quiz)
 export class QuizResolver {
   constructor(private quizService: QuizService) {}
 
+  @UseGuards(AuthGuard)
   @Query(() => [Quiz])
-  async quizzes(): Promise<Quiz[]> {
-    return this.quizService.findAll();
+  async getUserQuizzes(@CurrentUser() user: User): Promise<Quiz[]> {
+    return this.quizService.getUserQuizzes({ user });
   }
 
   @Query(() => Quiz)
@@ -18,9 +30,13 @@ export class QuizResolver {
     return this.quizService.findOne(id);
   }
 
-  @Mutation(() => User)
-  async createQuiz(@Args('data') data: QuizInput): Promise<Quiz> {
-    return this.quizService.create(data);
+  @UseGuards(AuthGuard)
+  @Mutation(() => Quiz)
+  async createQuiz(
+    @CurrentUser() user: User,
+    @Args('data') data: QuizInput,
+  ): Promise<Quiz> {
+    return this.quizService.create({ data, user });
   }
 
   @Mutation(() => Quiz)
@@ -42,5 +58,10 @@ export class QuizResolver {
 
     await quiz.destroy();
     return true;
+  }
+
+  @ResolveField(() => [Question])
+  async questions(@Parent() quiz: Quiz): Promise<Question[]> {
+    return this.quizService.getQuizQuestions({ quizId: quiz.id });
   }
 }
