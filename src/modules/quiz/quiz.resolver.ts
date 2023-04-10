@@ -7,7 +7,7 @@ import {
   ResolveField,
   Parent,
 } from '@nestjs/graphql';
-import { QuizInput } from './inputs/quiz.input';
+import { QuizInput, QuizUpdateInput } from './inputs/quiz.input';
 import { QuizService } from './quiz.service';
 import { User } from '@/core/database/models/user.model';
 import { Question } from '@/core/database/models/question.model';
@@ -42,12 +42,19 @@ export class QuizResolver {
   @Mutation(() => Quiz)
   async updateQuiz(
     @Args('id') id: number,
-    @Args('data') data: QuizInput,
+    @Args('data') data: QuizUpdateInput,
   ): Promise<Quiz | null> {
     const quiz = await Quiz.findByPk(id);
     if (!quiz) return null;
 
-    await quiz.update(data);
+    const { description, name } = data;
+
+    const entity: any = {};
+    if (name) entity.name = name;
+    if (description) entity.description = description;
+
+    await quiz.update(entity);
+
     return quiz;
   }
 

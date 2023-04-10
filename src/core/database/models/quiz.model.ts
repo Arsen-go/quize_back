@@ -50,4 +50,7 @@ export class Quiz extends Model<Quiz, CreateQuizAttributes> {
   @Field(() => String, { nullable: true })
   @Column({ type: DataType.INTEGER, allowNull: true })
   duration?: number | null;
+
+  @Field(() => Date)
+  createdAt: Date;
 }
