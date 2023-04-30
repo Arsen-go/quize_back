@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate {
     if (!decoded) {
       throw new UnauthorizedException('Unauthorized');
     }
-    console.log(decoded);
+
     req.currentUser = decoded;
 
     return true;

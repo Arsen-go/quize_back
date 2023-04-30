@@ -31,13 +31,14 @@ export class AuthService {
     if (!user) throw new Error('Password or login is wrong.');
 
     const isPasswordCorrect = await user.checkPassword(password);
+
     if (!isPasswordCorrect) throw new Error('Password or login is wrong.');
 
-    const payload = { email: user.email, id: user.id };
+    const payload = { email, id: user.id };
 
     return this.jwtService.sign(payload, {
-      secret: 'm',
-      expiresIn: 1000000000,
+      secret: process.env.JWT_SECRET,
+      expiresIn: process.env.EXPIRE_TIME,
     });
   }
 }

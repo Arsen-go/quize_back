@@ -3,6 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { QuizInput } from './inputs/quiz.input';
 import { Question } from '@/core/database/models/question.model';
 import { User } from '@/core/database/models/user.model';
+import { AnswerQuizInput } from './inputs/answer-quiz.input';
+import { AnsweredUser } from '@/core/database/models/answered-user.model';
 
 @Injectable()
 export class QuizService {
@@ -25,6 +27,20 @@ export class QuizService {
     );
 
     return quiz;
+  }
+
+  async answerQuiz({
+    answerInput,
+    user,
+  }: {
+    answerInput: AnswerQuizInput;
+    user: User;
+  }): Promise<number> {
+    const { answers, quizId, userName, score } = answerInput;
+
+    await AnsweredUser.create({ quizId, score, userName });
+
+    return score;
   }
 
   async update(id: number, data: QuizInput): Promise<Quiz | null> {

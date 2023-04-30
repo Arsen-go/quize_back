@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('results', {
+    await queryInterface.createTable('answered_users', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -19,15 +19,9 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      userId: {
-        type: Sequelize.INTEGER,
+      userName: {
+        type: Sequelize.STRING,
         allowNull: false,
-        references: {
-          model: 'users',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
       score: {
         type: Sequelize.INTEGER,
@@ -47,6 +41,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('results');
+    await queryInterface.dropTable('answered_users');
   },
 };

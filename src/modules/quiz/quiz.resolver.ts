@@ -14,6 +14,7 @@ import { Question } from '@/core/database/models/question.model';
 import { CurrentUser } from '@/decorators/current-user.decorator';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@/guards/auth.guard';
+import { AnswerQuizInput } from './inputs/answer-quiz.input';
 
 @Resolver(() => Quiz)
 export class QuizResolver {
@@ -39,6 +40,14 @@ export class QuizResolver {
     return this.quizService.create({ data, user });
   }
 
+  @Mutation(() => Number)
+  async answerQuiz(
+    @CurrentUser() user: User,
+    @Args('answerInput') answerInput: AnswerQuizInput,
+  ): Promise<number> {
+    return this.quizService.answerQuiz({ answerInput, user });
+  }
+
   @Mutation(() => Quiz)
   async updateQuiz(
     @Args('id') id: number,
@@ -60,6 +69,10 @@ export class QuizResolver {
 
   @Mutation(() => Boolean)
   async deleteQuiz(@Args('id') id: number): Promise<boolean> {
+    console.log(
+      '🚀 ~ file: quiz.resolver.ts:63 ~ QuizResolver ~ deleteQuiz ~ id:',
+      id,
+    );
     const quiz = await Quiz.findByPk(id);
     if (!quiz) return false;
 
