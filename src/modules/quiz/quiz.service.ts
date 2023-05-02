@@ -68,6 +68,18 @@ export class QuizService {
     return Quiz.findByPk(id, { include: [{ all: true }] });
   }
 
+  async getAnsweredUsers({
+    quizId,
+  }: {
+    quizId: number;
+  }): Promise<AnsweredUser[]> {
+    return AnsweredUser.findAll({
+      where: {
+        quizId,
+      },
+    });
+  }
+
   async getQuizQuestions({ quizId }: { quizId: number }): Promise<Question[]> {
     return Question.findAll({ where: { quizId } });
   }

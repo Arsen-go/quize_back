@@ -15,6 +15,7 @@ import { CurrentUser } from '@/decorators/current-user.decorator';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@/guards/auth.guard';
 import { AnswerQuizInput } from './inputs/answer-quiz.input';
+import { AnsweredUser } from '@/core/database/models/answered-user.model';
 
 @Resolver(() => Quiz)
 export class QuizResolver {
@@ -29,6 +30,11 @@ export class QuizResolver {
   @Query(() => Quiz)
   async quiz(@Args('id') id: number): Promise<Quiz | null> {
     return this.quizService.findOne(id);
+  }
+
+  @Query(() => [AnsweredUser])
+  async answeredUsers(@Args('quizId') quizId: number): Promise<AnsweredUser[]> {
+    return this.quizService.getAnsweredUsers({ quizId });
   }
 
   @UseGuards(AuthGuard)
@@ -48,12 +54,13 @@ export class QuizResolver {
     return this.quizService.answerQuiz({ answerInput, user });
   }
 
-  @Mutation(() => Quiz)
+  @Mutation(() => Quiz, { nullable: true })
   async updateQuiz(
     @Args('id') id: number,
     @Args('data') data: QuizUpdateInput,
   ): Promise<Quiz | null> {
     const quiz = await Quiz.findByPk(id);
+    console.log('🚀 ~ file: quiz.resolver.ts:63 ~ QuizResolver ~ id:', id);
     if (!quiz) return null;
 
     const { description, name } = data;

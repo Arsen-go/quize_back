@@ -20,7 +20,7 @@ interface CreateQuizAttributes {
 @Table({ tableName: 'quizzes', timestamps: true })
 @ObjectType()
 export class Quiz extends Model<Quiz, CreateQuizAttributes> {
-  @Field(() => ID)
+  @Field(() => Number)
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
@@ -44,7 +44,7 @@ export class Quiz extends Model<Quiz, CreateQuizAttributes> {
   name!: string;
 
   @Field(() => String, { nullable: true })
-  @Column({ type: DataType.STRING, allowNull: true })
+  @Column({ type: DataType.TEXT({ length: 'long' }), allowNull: true })
   description?: string | null;
 
   @Field(() => String, { nullable: true })

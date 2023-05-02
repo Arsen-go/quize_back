@@ -44,4 +44,7 @@ export class AnsweredUser extends Model<AnsweredUser, CreateResultAttributes> {
   @Field(() => String)
   @Column({ type: DataType.STRING })
   userName!: string;
+
+  @Field(() => String)
+  createdAt: Date;
 }
