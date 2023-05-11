@@ -77,6 +77,7 @@ export class QuizService {
       where: {
         quizId,
       },
+      order: [['score', 'DESC']],
     });
   }
 
