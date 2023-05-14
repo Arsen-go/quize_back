@@ -1,0 +1,302 @@
+[
+  {
+    "name": "Node.js Basics Quiz",
+    "description": "Test your knowledge of the basics of Node.js.",
+    "questions": [
+      {
+        "questionText": "What is Node.js?",
+        "options": [
+          "A web browser",
+          "A programming language",
+          "A web framework",
+          "A JavaScript runtime"
+        ],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "What is the purpose of the Node Package Manager (npm)?",
+        "options": [
+          "To create web applications",
+          "To install and manage Node.js packages",
+          "To manage database connections",
+          "To handle client-side scripting"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is a callback function in Node.js?",
+        "options": [
+          "A function that is called before the main function",
+          "A function that is called after the main function",
+          "A function that is called at a specific time interval",
+          "A function that is passed as an argument to another function and is called when that function completes"
+        ],
+        "correctAnswer": 4
+      }
+    ]
+  },
+  {
+    "name": "Node.js Web Development Quiz",
+    "description": "Test your knowledge of web development with Node.js.",
+    "questions": [
+      {
+        "questionText": "What is Express.js?",
+        "options": [
+          "A programming language",
+          "A web framework for Node.js",
+          "A database management system",
+          "A text editor"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the purpose of the EJS templating engine?",
+        "options": [
+          "To manage database connections",
+          "To handle client-side scripting",
+          "To generate HTML markup with dynamic content",
+          "To create web applications"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is middleware in the context of Node.js?",
+        "options": [
+          "A type of web browser",
+          "A library of reusable code",
+          "A function that is executed before or after a request is handled",
+          "A programming language"
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  },
+  {
+    "name": "Node.js Advanced Concepts Quiz",
+    "description": "Test your knowledge of advanced concepts in Node.js.",
+    "questions": [
+      {
+        "questionText": "What is the purpose of the Cluster module in Node.js?",
+        "options": [
+          "To manage multiple Node.js processes",
+          "To create a cluster of web servers",
+          "To manage database connections",
+          "To handle client-side scripting"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the purpose of the Stream module in Node.js?",
+        "options": [
+          "To manage database connections",
+          "To handle client-side scripting",
+          "To read and write data in chunks",
+          "To create web applications"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is the purpose of the Child Process module in Node.js?",
+        "options": [
+          "To manage database connections",
+          "To handle client-side scripting",
+          "To spawn child processes",
+          "To create web applications"
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  },
+  {
+    "name": "Advanced Node.js Quiz",
+    "description": "Test your knowledge of advanced Node.js concepts.",
+    "questions": [
+      {
+        "questionText": "What is the difference between the 'require' and 'import' statements in Node.js?",
+        "options": [
+          "There is no difference",
+          "The 'require' statement is used to import built-in modules, while 'import' is used to import external modules",
+          "'import' is used to import built-in modules, while 'require' is used to import external modules",
+          "'import' is a newer syntax introduced in ES6, while 'require' is an older syntax"
+        ],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "What is the purpose of the 'util' module in Node.js?",
+        "options": [
+          "To provide access to low-level system information",
+          "To handle networking operations",
+          "To provide common utility functions that can be used throughout an application",
+          "To handle file system operations"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is an event loop in Node.js?",
+        "options": [
+          "A type of callback function",
+          "A loop that waits for events to occur and then executes the associated callback functions",
+          "A loop that runs continuously and never stops",
+          "A loop that is used to manage network connections"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the purpose of the 'cluster' module in Node.js?",
+        "options": [
+          "To provide a way to run Node.js in a distributed environment",
+          "To manage multiple Node.js processes on a single machine",
+          "To provide access to low-level system information",
+          "To handle networking operations"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the purpose of the 'crypto' module in Node.js?",
+        "options": [
+          "To handle file system operations",
+          "To provide common utility functions that can be used throughout an application",
+          "To handle networking operations",
+          "To provide cryptographic functionality such as hashing, encryption, and decryption"
+        ],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "What is the purpose of the 'process' object in Node.js?",
+        "options": [
+          "To provide access to low-level system information",
+          "To handle file system operations",
+          "To handle networking operations",
+          "To provide information about the Node.js process and its environment"
+        ],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "What is the purpose of the 'path' module in Node.js?",
+        "options": [
+          "To provide access to low-level system information",
+          "To handle file system operations",
+          "To handle networking operations",
+          "To provide utilities for working with file and directory paths"
+        ],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "What is the purpose of the 'http' module in Node.js?",
+        "options": [
+          "To handle file system operations",
+          "To handle networking operations",
+          "To provide common utility functions that can be used throughout an application",
+          "To provide access to low-level system information"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the purpose of the 'fs' module in Node.js?",
+        "options": [
+          "To provide common utility functions that can be used throughout an application",
+          "To provide access to low-level system information",
+          "To handle networking operations",
+          "To handle file system operations"
+        ],
+        "correctAnswer": 4
+      }
+    ]
+  },
+  {
+    "name": "Node.js Quiz",
+    "description": "Test your knowledge of Node.js",
+    "questions": [
+      {
+        "questionText": "What is Node.js?",
+        "options": [
+          "A database management system",
+          "A front-end JavaScript framework",
+          "A back-end JavaScript runtime",
+          "A serverless architecture"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is NPM?",
+        "options": [
+          "A package manager for Node.js",
+          "A front-end JavaScript framework",
+          "A database management system",
+          "A serverless architecture"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the difference between a callback function and a promise?",
+        "options": [
+          "There is no difference",
+          "A callback function is a function that is called once a certain task has been completed, while a promise represents a value that may not be available yet but will be at some point in the future",
+          "A promise is a function that is called once a certain task has been completed, while a callback function represents a value that may not be available yet but will be at some point in the future",
+          "A callback function is used to handle errors, while a promise is used to handle successful outcomes"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the purpose of the 'async' and 'await' keywords in JavaScript?",
+        "options": [
+          "To handle network connections",
+          "To handle errors in a try-catch block",
+          "To write asynchronous code that looks synchronous",
+          "To handle file system operations"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is middleware in the context of Node.js?",
+        "options": [
+          "A piece of software that sits between a database and a server",
+          "A library that helps you build user interfaces",
+          "A function that runs between the request and response objects in a server",
+          "A tool used to optimize database performance"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is Express.js?",
+        "options": [
+          "A front-end JavaScript framework",
+          "A server-side rendering tool",
+          "A back-end JavaScript framework for building web applications",
+          "A database management system"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is the purpose of the 'body-parser' middleware in Express.js?",
+        "options": [
+          "To parse HTTP requests",
+          "To handle file system operations",
+          "To optimize database performance",
+          "To handle network connections"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the purpose of the 'cors' middleware in Express.js?",
+        "options": [
+          "To optimize database performance",
+          "To handle network connections",
+          "To handle file system operations",
+          "To enable cross-origin resource sharing"
+        ],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "What is the difference between 'let' and 'var' in JavaScript?",
+        "options": [
+          "There is no difference",
+          "'let' is block-scoped, while 'var' is function-scoped",
+          "'let' is used to declare constants, while 'var' is used to declare variables",
+          "'var' is a newer syntax introduced in ES6, while 'let' is an older syntax"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  }
+]

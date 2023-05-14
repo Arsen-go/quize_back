@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Python Basics Quiz",
+    "description": "Test your knowledge of the basics of Python programming language.",
+    "questions": [
+      {
+        "questionText": "What is Python?",
+        "options": [
+          "A compiled programming language",
+          "A markup language",
+          "A scripting language",
+          "A database management system"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is the extension of a Python file?",
+        "options": [".java", ".py", ".cpp", ".cs"],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "Which of the following is an example of a Python library?",
+        "options": ["NumPy", "Visual Studio", "Eclipse", "Atom"],
+        "correctAnswer": 1
+      }
+    ]
+  },
+  {
+    "name": "Python Data Types Quiz",
+    "description": "Test your knowledge of data types in Python programming language.",
+    "questions": [
+      {
+        "questionText": "What is the data type of 'hello' in Python?",
+        "options": ["String", "Integer", "Boolean", "List"],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the data type of 3.14 in Python?",
+        "options": ["String", "Integer", "Boolean", "Float"],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "Which of the following is a sequence data type in Python?",
+        "options": ["Dictionary", "Tuple", "Set", "None of the above"],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "name": "Python Functions Quiz",
+    "description": "Test your knowledge of functions in Python programming language.",
+    "questions": [
+      {
+        "questionText": "What is a function in Python?",
+        "options": [
+          "A group of related data items",
+          "A set of instructions to perform a specific task",
+          "A data structure",
+          "A loop"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the difference between a parameter and an argument in a Python function?",
+        "options": [
+          "There is no difference, they are the same thing",
+          "A parameter is a variable in a function definition, while an argument is a value passed to a function",
+          "An argument is a variable in a function definition, while a parameter is a value passed to a function",
+          "A parameter is used for iteration, while an argument is used for computation"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "Which keyword is used to define a function in Python?",
+        "options": ["define", "function", "def", "end"],
+        "correctAnswer": 3
+      }
+    ]
+  }
+]

@@ -1,0 +1,161 @@
+[
+  {
+    "name": "Data Science Fundamentals Quiz",
+    "description": "Test your knowledge of the fundamentals of data science.",
+    "questions": [
+      {
+        "questionText": "What is data science?",
+        "options": [
+          "The study of how to create data",
+          "The study of how to analyze and interpret data",
+          "The study of how to store data",
+          "The study of how to delete data"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the difference between a population and a sample?",
+        "options": [
+          "A population is a subset of a sample",
+          "A sample is a subset of a population",
+          "A population includes all possible values, while a sample includes only some of them",
+          "A sample includes all possible values, while a population includes only some of them"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the purpose of exploratory data analysis?",
+        "options": [
+          "To find patterns in the data",
+          "To create a model for the data",
+          "To make predictions about future data",
+          "To measure the accuracy of the data"
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  },
+  {
+    "name": "Data Science Tools Quiz",
+    "description": "Test your knowledge of the tools used in data science.",
+    "questions": [
+      {
+        "questionText": "Which of the following is a popular programming language used in data science?",
+        "options": ["HTML", "CSS", "JavaScript", "Python"],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "What is the purpose of SQL in data science?",
+        "options": [
+          "To perform statistical analysis on data",
+          "To create data visualizations",
+          "To manipulate and query data in databases",
+          "To generate reports about data"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is the purpose of machine learning in data science?",
+        "options": [
+          "To find patterns in the data",
+          "To create a model for the data",
+          "To make predictions about future data",
+          "To measure the accuracy of the data"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "name": "Data Science Statistics Quiz",
+    "description": "Test your knowledge of statistics used in data science.",
+    "questions": [
+      {
+        "questionText": "What is the difference between a mean and a median?",
+        "options": [
+          "A mean is the middle value, while a median is the average",
+          "A median is the middle value, while a mean is the average",
+          "A mean and a median are the same thing",
+          "A mean and a median are both measures of variability"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is a standard deviation?",
+        "options": [
+          "The sum of the squared deviations from the mean",
+          "The average of the squared deviations from the mean",
+          "The square root of the variance",
+          "The difference between the largest and smallest values"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is the purpose of hypothesis testing?",
+        "options": [
+          "To find patterns in the data",
+          "To create a model for the data",
+          "To make predictions about future data",
+          "To test a claim about the population based on a sample of data"
+        ],
+        "correctAnswer": 4
+      }
+    ]
+  },
+  {
+    "name": "Data Science Fundamentals Quiz",
+    "description": "Test your knowledge of the fundamentals of data science.",
+    "questions": [
+      {
+        "questionText": "What is data mining?",
+        "options": [
+          "The process of extracting useful information from data",
+          "The process of storing data for future use",
+          "The process of deleting data",
+          "The process of creating data"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the difference between supervised and unsupervised learning?",
+        "options": [
+          "Supervised learning uses labeled data, while unsupervised learning uses unlabeled data",
+          "Supervised learning uses unlabeled data, while unsupervised learning uses labeled data",
+          "Supervised learning and unsupervised learning are the same thing",
+          "Supervised learning and unsupervised learning both use labeled data"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is overfitting in machine learning?",
+        "options": [
+          "When a model is too simple and underperforms on new data",
+          "When a model is too complex and performs well on the training data but poorly on new data",
+          "When a model is not flexible enough to capture the underlying patterns in the data",
+          "When a model is too flexible and captures noise in the data"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the purpose of data normalization?",
+        "options": [
+          "To remove outliers from the data",
+          "To make the data easier to visualize",
+          "To convert the data to a standard scale",
+          "To add noise to the data"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is the difference between a p-value and a confidence interval?",
+        "options": [
+          "A p-value measures the strength of evidence against the null hypothesis, while a confidence interval measures the range of plausible values for the population parameter",
+          "A confidence interval measures the strength of evidence against the null hypothesis, while a p-value measures the range of plausible values for the population parameter",
+          "A p-value and a confidence interval are the same thing",
+          "A p-value and a confidence interval both measure the probability of a type I error"
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  }
+]

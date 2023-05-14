@@ -16,6 +16,7 @@ import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@/guards/auth.guard';
 import { AnswerQuizInput } from './inputs/answer-quiz.input';
 import { AnsweredUser } from '@/core/database/models/answered-user.model';
+import { RandomQuizType } from '@/constants/enums';
 
 @Resolver(() => Quiz)
 export class QuizResolver {
@@ -46,6 +47,20 @@ export class QuizResolver {
     return this.quizService.create({ data, user });
   }
 
+  @UseGuards(AuthGuard)
+  @Mutation(() => Quiz)
+  async createRandomQuiz(
+    @CurrentUser() user: User,
+    @Args('type', {
+      type() {
+        return RandomQuizType;
+      },
+    })
+    type: RandomQuizType,
+  ): Promise<Quiz> {
+    return this.quizService.createRandomQuiz({ type, user });
+  }
+
   @Mutation(() => Number)
   async answerQuiz(
     @CurrentUser() user: User,
@@ -60,7 +75,6 @@ export class QuizResolver {
     @Args('data') data: QuizUpdateInput,
   ): Promise<Quiz | null> {
     const quiz = await Quiz.findByPk(id);
-    console.log('🚀 ~ file: quiz.resolver.ts:63 ~ QuizResolver ~ id:', id);
     if (!quiz) return null;
 
     const { description, name } = data;
@@ -76,10 +90,6 @@ export class QuizResolver {
 
   @Mutation(() => Boolean)
   async deleteQuiz(@Args('id') id: number): Promise<boolean> {
-    console.log(
-      '🚀 ~ file: quiz.resolver.ts:63 ~ QuizResolver ~ deleteQuiz ~ id:',
-      id,
-    );
     const quiz = await Quiz.findByPk(id);
     if (!quiz) return false;
 

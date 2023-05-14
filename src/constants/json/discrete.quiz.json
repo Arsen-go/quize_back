@@ -1,0 +1,95 @@
+[
+  {
+    "name": "Discrete Mathematics: Sets Quiz",
+    "description": "Test your knowledge of sets in discrete mathematics.",
+    "questions": [
+      {
+        "questionText": "What is a set in discrete mathematics?",
+        "options": [
+          "A collection of numbers or objects",
+          "A mathematical operation",
+          "A type of function",
+          "A type of matrix"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "questionText": "What is the cardinality of the set {1, 2, 3, 4, 5}?",
+        "options": ["0", "1", "5", "10"],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the intersection of the sets {1, 2, 3} and {3, 4, 5}?",
+        "options": ["{1, 2, 3, 4, 5}", "{1, 2}", "{3}", "{}"],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "name": "Discrete Mathematics: Relations Quiz",
+    "description": "Test your knowledge of relations in discrete mathematics.",
+    "questions": [
+      {
+        "questionText": "What is a relation in discrete mathematics?",
+        "options": [
+          "A function that maps one set to another",
+          "A collection of ordered pairs",
+          "A type of equation",
+          "A type of graph"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the inverse of the relation {(1, 2), (3, 4)}?",
+        "options": [
+          "{(1, 2)}",
+          "{(2, 1), (4, 3)}",
+          "{(2, 1), (4, 3), (1, 2), (3, 4)}",
+          "{}"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the composition of the relations {(1, 2), (2, 3)} and {(3, 4), (4, 5)}?",
+        "options": [
+          "{(1, 2), (2, 3), (3, 4), (4, 5)}",
+          "{(1, 4), (2, 5)}",
+          "{(1, 3), (2, 4), (3, 5)}",
+          "{}"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "name": "Discrete Mathematics: Logic Quiz",
+    "description": "Test your knowledge of logic in discrete mathematics.",
+    "questions": [
+      {
+        "questionText": "What is a proposition in discrete mathematics?",
+        "options": [
+          "A mathematical operation",
+          "A collection of numbers or objects",
+          "A statement that is either true or false",
+          "A type of set"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the truth value of the proposition 'If p then q' if p is false and q is true?",
+        "options": ["True", "False", "Cannot be determined", "Does not exist"],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the negation of the proposition 'p and q'?",
+        "options": [
+          "p or q",
+          "not p or not q",
+          "not p and not q",
+          "not p and q"
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  }
+]

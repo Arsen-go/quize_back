@@ -1,0 +1,21 @@
+{
+  "name": "My Quiz",
+  "description": "A quiz about animals",
+  "questions": [
+    {
+      "questionText": "What is the largest animal on earth?",
+      "options": ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+      "correctAnswer": 1
+    },
+    {
+      "questionText": "Which of these animals is not a mammal?",
+      "options": ["Platypus", "Dolphin", "Kangaroo", "Crocodile"],
+      "correctAnswer": 3
+    },
+    {
+      "questionText": "What is the fastest land animal?",
+      "options": ["Cheetah", "Lion", "Tiger", "Leopard"],
+      "correctAnswer": 0
+    }
+  ]
+}

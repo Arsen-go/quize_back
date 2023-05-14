@@ -1,0 +1,90 @@
+[
+  {
+    "name": "Assembly Basics Quiz",
+    "description": "Test your knowledge of the basics of Assembly language.",
+    "questions": [
+      {
+        "questionText": "What is Assembly?",
+        "options": [
+          "A compiled programming language",
+          "A markup language",
+          "A scripting language",
+          "A low-level programming language"
+        ],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "Which of the following is NOT an Assembly instruction?",
+        "options": ["ADD", "MOV", "PRINT", "CMP"],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is the purpose of the Assembly language?",
+        "options": [
+          "To make programming easier",
+          "To make programs run faster",
+          "To create graphics",
+          "To manage databases"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "name": "Assembly Registers Quiz",
+    "description": "Test your knowledge of the registers in Assembly language.",
+    "questions": [
+      {
+        "questionText": "What are registers in Assembly?",
+        "options": [
+          "Memory locations",
+          "Storage locations for data",
+          "Program counter",
+          "Input/output devices"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "Which register is used to hold the memory address of an operand?",
+        "options": ["AX", "BX", "CX", "DX"],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "What is the purpose of the stack pointer register?",
+        "options": [
+          "To hold the memory address of the next instruction to be executed",
+          "To store data temporarily",
+          "To hold the memory address of the top of the stack",
+          "To hold the memory address of the data segment"
+        ],
+        "correctAnswer": 3
+      }
+    ]
+  },
+  {
+    "name": "Assembly Instructions Quiz",
+    "description": "Test your knowledge of the instructions in Assembly language.",
+    "questions": [
+      {
+        "questionText": "What is the purpose of the ADD instruction?",
+        "options": [
+          "To subtract two numbers",
+          "To multiply two numbers",
+          "To divide two numbers",
+          "To add two numbers"
+        ],
+        "correctAnswer": 4
+      },
+      {
+        "questionText": "Which instruction is used to compare two values in Assembly?",
+        "options": ["ADD", "SUB", "CMP", "MOV"],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "Which instruction is used to jump to a specific location in the program?",
+        "options": ["JMP", "CALL", "RET", "INT"],
+        "correctAnswer": 1
+      }
+    ]
+  }
+]

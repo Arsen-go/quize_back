@@ -1,0 +1,147 @@
+[
+  {
+    "name": "C++ Programming Quiz 1",
+    "description": "Test your knowledge of basic C++ programming concepts.",
+    "questions": [
+      {
+        "questionText": "What is the output of the following code?\n\n#include <iostream>\nusing namespace std;\nint main() {\n    cout << \"Hello, world!\" << endl;\n    return 0;\n}",
+        "options": ["Hello, world!", "world!, Hello,", "Hello,", "world!,"],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the correct syntax for a while loop in C++?",
+        "options": [
+          "while (i < 10)",
+          "while (i < 10; i++)",
+          "while (i < 10, i++)",
+          "while (i < 10: i++)"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the difference between a reference and a pointer in C++?",
+        "options": [
+          "There is no difference",
+          "A reference is a variable that refers to another variable, while a pointer is a variable that contains the memory address of another variable",
+          "A reference is a pointer to a memory address, while a pointer is a variable that refers to another variable",
+          "A reference is a primitive data type, while a pointer is a user-defined data type"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "name": "C++ Programming Quiz 2",
+    "description": "Test your knowledge of C++ programming syntax and data types.",
+    "questions": [
+      {
+        "questionText": "What is the correct syntax for declaring a variable in C++?",
+        "options": ["int x = 5;", "int x := 5;", "x = 5;", "5 = x;"],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the difference between a float and a double in C++?",
+        "options": [
+          "There is no difference",
+          "A float is a 32-bit floating point data type, while a double is a 64-bit floating point data type",
+          "A float is a 64-bit floating point data type, while a double is a 32-bit floating point data type",
+          "A float is a primitive data type, while a double is a user-defined data type"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the correct way to declare and initialize a constant in C++?",
+        "options": [
+          "const int x = 5;",
+          "constant x = 5;",
+          "int x = const 5;",
+          "int const x = 5;"
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  },
+  {
+    "name": "C++ Data Types Quiz",
+    "description": "Test your knowledge of C++ data types.",
+    "questions": [
+      {
+        "questionText": "What is the size of a boolean data type in C++?",
+        "options": ["1 byte", "2 bytes", "4 bytes", "8 bytes"],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "Which data type is used to store a single character in C++?",
+        "options": ["char", "int", "float", "double"],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the range of values that can be stored in a short int data type in C++?",
+        "options": ["-128 to 127", "-32768 to 32767", "0 to 255", "0 to 65535"],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "name": "C++ Functions Quiz",
+    "description": "Test your knowledge of C++ functions.",
+    "questions": [
+      {
+        "questionText": "Which keyword is used to declare a function in C++?",
+        "options": ["func", "def", "void", "function"],
+        "correctAnswer": 3
+      },
+      {
+        "questionText": "What is the purpose of the return statement in a function in C++?",
+        "options": [
+          "To terminate the function",
+          "To return a value from the function",
+          "To skip a loop iteration",
+          "To execute the next line of code"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the difference between call by value and call by reference in C++?",
+        "options": [
+          "There is no difference",
+          "Call by value passes the value of a variable to a function, while call by reference passes the address of a variable to a function",
+          "Call by reference passes the value of a variable to a function, while call by value passes the address of a variable to a function",
+          "Call by value and call by reference are not valid syntax in C++"
+        ],
+        "correctAnswer": 2
+      }
+    ]
+  },
+  {
+    "name": "C++ Pointers Quiz",
+    "description": "Test your knowledge of C++ pointers.",
+    "questions": [
+      {
+        "questionText": "What is the purpose of a pointer in C++?",
+        "options": [
+          "To store the address of a variable",
+          "To store the value of a variable",
+          "To allocate memory dynamically",
+          "To access the elements of an array"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "questionText": "What is the difference between a null pointer and a void pointer in C++?",
+        "options": [
+          "There is no difference",
+          "A null pointer is a pointer that points to no memory address, while a void pointer is a pointer that can point to any type of data",
+          "A null pointer is a pointer that can point to any type of data, while a void pointer is a pointer that points to no memory address",
+          "A null pointer and a void pointer are not valid syntax in C++"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "questionText": "What is the output of the following code?\n\n#include <iostream>\nusing namespace std;\nint main() {\n int x = 5;\n int *p = &x;\n cout << *p << endl;\n return 0;\n}",
+        "options": ["5", "&x", "0", "1"],
+        "correctAnswer": 1
+      }
+    ]
+  }
+]

@@ -5,6 +5,8 @@ import { Question } from '@/core/database/models/question.model';
 import { User } from '@/core/database/models/user.model';
 import { AnswerQuizInput } from './inputs/answer-quiz.input';
 import { AnsweredUser } from '@/core/database/models/answered-user.model';
+import { RandomQuizType } from '@/constants/enums';
+const fs = require('fs');
 
 @Injectable()
 export class QuizService {
@@ -27,6 +29,85 @@ export class QuizService {
     );
 
     return quiz;
+  }
+
+  async createRandomQuiz({
+    type,
+    user,
+  }: {
+    type: RandomQuizType;
+    user: User;
+  }): Promise<Quiz> {
+    console.log('🚀 ~ file: quiz.service.ts:41 ~ QuizService ~ type:', type);
+    let quiz: QuizInput;
+    let data: any;
+    let quizzes: any;
+    switch (type) {
+      case RandomQuizType.C_PLUS_PLUS:
+        data = fs.readFileSync('src/constants/json/cPlusPlus.quiz.json', {
+          encoding: 'utf8',
+        });
+        quizzes = JSON.parse(data);
+
+        quiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+        break;
+      case RandomQuizType.DISCRETE:
+        data = fs.readFileSync('src/constants/json/discrete.quiz.json', {
+          encoding: 'utf8',
+        });
+        quizzes = JSON.parse(data);
+
+        quiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+        break;
+      case RandomQuizType.PYTHON:
+        data = fs.readFileSync('src/constants/json/python.quiz.json', {
+          encoding: 'utf8',
+        });
+        quizzes = JSON.parse(data);
+
+        quiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+        break;
+      case RandomQuizType.ASSEMBLY:
+        data = fs.readFileSync('src/constants/json/assembly.quiz.json', {
+          encoding: 'utf8',
+        });
+        quizzes = JSON.parse(data);
+
+        quiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+        break;
+      case RandomQuizType.DATA_SCIENCE:
+        data = fs.readFileSync('src/constants/json/data-science.quiz.json', {
+          encoding: 'utf8',
+        });
+        quizzes = JSON.parse(data);
+
+        quiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+        break;
+      default:
+        break;
+    }
+    console.log('🚀 ~ file: quiz.service.ts:95 ~ QuizService ~ user:', user);
+
+    const newQuiz: Quiz = await Quiz.create({
+      description: quiz.description,
+      name: quiz.name,
+      ownerId: user.id,
+    });
+    console.log(
+      '🚀 ~ file: quiz.service.ts:95 ~ QuizService ~ newQuiz:',
+      newQuiz,
+    );
+
+    await Question.bulkCreate(
+      quiz.questions.map((q) => ({
+        correctAnswer: q.correctAnswer,
+        options: q.options,
+        questionText: q.questionText,
+        quizId: newQuiz.id,
+      })),
+    );
+
+    return newQuiz;
   }
 
   async answerQuiz({
