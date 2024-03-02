@@ -74,27 +74,12 @@ export class QuizResolver {
     @Args('id') id: number,
     @Args('data') data: QuizUpdateInput,
   ): Promise<Quiz | null> {
-    const quiz = await Quiz.findByPk(id);
-    if (!quiz) return null;
-
-    const { description, name } = data;
-
-    const entity: any = {};
-    if (name) entity.name = name;
-    if (description) entity.description = description;
-
-    await quiz.update(entity);
-
-    return quiz;
+    return this.quizService.updateQuiz({ data, id });
   }
 
   @Mutation(() => Boolean)
   async deleteQuiz(@Args('id') id: number): Promise<boolean> {
-    const quiz = await Quiz.findByPk(id);
-    if (!quiz) return false;
-
-    await quiz.destroy();
-    return true;
+    return this.quizService.delete({ id });
   }
 
   @ResolveField(() => [Question])

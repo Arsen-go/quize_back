@@ -1,6 +1,6 @@
 import { Quiz } from '@/core/database/models/quiz.model';
 import { Injectable } from '@nestjs/common';
-import { QuizInput } from './inputs/quiz.input';
+import { QuizInput, QuizUpdateInput } from './inputs/quiz.input';
 import { Question } from '@/core/database/models/question.model';
 import { User } from '@/core/database/models/user.model';
 import { AnswerQuizInput } from './inputs/answer-quiz.input';
@@ -38,7 +38,6 @@ export class QuizService {
     type: RandomQuizType;
     user: User;
   }): Promise<Quiz> {
-    console.log('🚀 ~ file: quiz.service.ts:41 ~ QuizService ~ type:', type);
     let quiz: QuizInput;
     let data: any;
     let quizzes: any;
@@ -86,17 +85,12 @@ export class QuizService {
       default:
         break;
     }
-    console.log('🚀 ~ file: quiz.service.ts:95 ~ QuizService ~ user:', user);
 
     const newQuiz: Quiz = await Quiz.create({
       description: quiz.description,
       name: quiz.name,
       ownerId: user.id,
     });
-    console.log(
-      '🚀 ~ file: quiz.service.ts:95 ~ QuizService ~ newQuiz:',
-      newQuiz,
-    );
 
     await Question.bulkCreate(
       quiz.questions.map((q) => ({
@@ -117,6 +111,7 @@ export class QuizService {
     answerInput: AnswerQuizInput;
     user: User;
   }): Promise<number> {
+    // TODO
     const { answers, quizId, userName, score } = answerInput;
 
     await AnsweredUser.create({ quizId, score, userName });
@@ -124,24 +119,38 @@ export class QuizService {
     return score;
   }
 
-  async update(id: number, data: QuizInput): Promise<Quiz | null> {
-    const quiz = await Quiz.findByPk(id);
+  async updateQuiz({
+    data,
+    id,
+  }: {
+    data: QuizUpdateInput;
+    id: number;
+  }): Promise<Quiz | null> {
+    const quiz: Quiz = await Quiz.findByPk(id);
     if (!quiz) return null;
 
-    await quiz.update(data);
+    const { description, name } = data;
+
+    const entity: any = {};
+    if (name) entity.name = name;
+    if (description) entity.description = description;
+
+    await quiz.update(entity);
+
     return quiz;
   }
 
-  async delete(id: number): Promise<boolean> {
-    const quiz = await Quiz.findByPk(id);
+  async delete({ id }: { id: number }): Promise<boolean> {
+    const quiz: Quiz = await Quiz.findByPk(id);
     if (!quiz) return false;
 
     await quiz.destroy();
+
     return true;
   }
 
   async getUserQuizzes({ user }): Promise<Quiz[]> {
-    console.log(user);
+    // TODO
     return Quiz.findAll({ include: [{ all: true }] });
   }
 

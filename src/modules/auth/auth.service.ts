@@ -11,6 +11,7 @@ export class AuthService {
     if (username === 'user' && password === 'password') {
       return { id: 1, username: 'user' };
     }
+
     return null;
   }
 
@@ -21,16 +22,15 @@ export class AuthService {
     email: string;
     password: string;
   }): Promise<string> {
-    console.log(email, password);
-
-    const user = await User.findOne({
+    const user: User = await User.findOne({
       where: {
         email,
       },
     });
+
     if (!user) throw new Error('Password or login is wrong.');
 
-    const isPasswordCorrect = await user.checkPassword(password);
+    const isPasswordCorrect: boolean = await user.checkPassword(password);
 
     if (!isPasswordCorrect) throw new Error('Password or login is wrong.');
 

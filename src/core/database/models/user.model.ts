@@ -55,6 +55,6 @@ export class User extends BaseModel<User, CreateUserAttr> {
   }
 
   async checkPassword(password: string): Promise<boolean> {
-    return await bcrypt.compare(password, this.password);
+    return bcrypt.compare(password, this.password);
   }
 }

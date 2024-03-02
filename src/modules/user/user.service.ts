@@ -17,12 +17,14 @@ export class UserService {
   }
 
   async update(id: number, input: CreateUserInput): Promise<User> {
-    const user = await User.findByPk(id);
+    const user: User = await User.findByPk(id);
+
     return user.update({});
   }
 
   async delete(id: number): Promise<void> {
-    const user = await User.findByPk(id);
+    const user: User = await User.findByPk(id);
+
     await user.destroy();
   }
 }
