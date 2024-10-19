@@ -1,40 +1,43 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from '@/app.module';
-import * as session from 'express-session';
 import * as cookieParser from 'cookie-parser';
-import { ValidationPipe } from '@nestjs/common';
+import * as cors from 'cors';
 
-const port = 5000;
+import { AppModule } from '@/app.module';
+import { Cors } from './config/configure-cors';
+import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
+import { configureHelmet } from './config/configure-helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     abortOnError: false,
+    autoFlushLogs: true,
     bodyParser: true,
-    cors: true,
   });
 
+  // Helmet middleware for security
+  app.use(configureHelmet());
   app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: false }));
 
+  // Use CORS middleware
   app.use(
-    session({
-      secret: 'quiz',
-      cookie: {
-        secure: process.env['NODE_ENV'] === 'production',
-        domain:
-          process.env['NODE_ENV'] === 'development'
-            ? 'localhost'
-            : process.env.FRONTEND_URL,
-        httpOnly: true,
-      },
-      resave: false,
-      saveUninitialized: false,
+    cors({
+      origin: 'http://localhost:3000',
+      credentials: true,
+      exposedHeaders: ['Content-Disposition'],
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      preflightContinue: false,
+      optionsSuccessStatus: 204, // Include any custom headers required
     }),
   );
 
   app.use(cookieParser());
 
+  const port = process.env.PORT || 4000;
   await app.listen(port);
+
+  console.log(`Server started at port ${port}`);
 }
-bootstrap()
-  .then(() => console.log('Server started on port ' + port))
-  .catch((err) => console.error(err));
+
+bootstrap().catch((err) => {
+  console.error('Failed to start the server:', err);
+});

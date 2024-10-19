@@ -4,10 +4,17 @@ import { UserService } from './user.service';
 import { CreateUserInput } from './inputs/create-user.input';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@/guards/auth.guard';
+import { CurrentUser } from '@/decorators/current-user.decorator';
 
+@UseGuards(AuthGuard)
 @Resolver(() => User)
 export class UserResolver {
   constructor(private userService: UserService) {}
+
+  @Query(() => User)
+  async getMe(@CurrentUser() user: User): Promise<User> {
+    return user;
+  }
 
   @Mutation(() => User)
   async createUser(@Args('input') input: CreateUserInput): Promise<User> {

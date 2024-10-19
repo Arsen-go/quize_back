@@ -52,6 +52,7 @@
     "graphql": "^16.6.0",
     "graphql-depth-limit": "^1.1.0",
     "graphql-type-json": "^0.3.2",
+    "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.0",
     "memory-cache": "^0.2.0",
     "mysql2": "^2.3.3",
@@ -60,7 +61,7 @@
     "rxjs": "^7.2.0",
     "sequelize": "^6.26.0",
     "sequelize-typescript": "^2.1.5",
-    "socket.io": "^4.5.4",
+    "socket.io": "^4.8.0",
     "type-graphql": "^1.1.1"
   },
   "devDependencies": {

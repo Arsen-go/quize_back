@@ -1,6 +1,9 @@
-import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query, Context } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
-import { User } from '@/core/database/models/user.model';
+import { RefreshToken } from '@/decorators/refresh-token.decorator';
+import { RefreshTokenGuard } from '@/guards/refresh-token.guard';
+import { UseGuards } from '@nestjs/common/decorators';
+import { Response } from 'express';
 
 @Resolver()
 export class AuthResolver {
@@ -12,5 +15,14 @@ export class AuthResolver {
     @Args('password') password: string,
   ): Promise<string> {
     return this.authService.login({ email, password });
+  }
+
+  @UseGuards(RefreshTokenGuard)
+  @Query(() => String)
+  async refreshToken(
+    @Context('res') res: Response,
+    @RefreshToken() refreshToken: string,
+  ) {
+    return this.authService.refreshToken(res, refreshToken);
   }
 }

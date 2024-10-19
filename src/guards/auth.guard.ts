@@ -1,11 +1,13 @@
-import { GqlExecutionContext } from '@nestjs/graphql';
 import {
   CanActivate,
   ExecutionContext,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
+
+import { GqlExecutionContext } from '@nestjs/graphql';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '@/core/database/models/user.model';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -29,7 +31,9 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException('Unauthorized');
     }
 
-    req.currentUser = decoded;
+    const user = await User.findByPk(decoded.id);
+
+    req.currentUser = user;
 
     return true;
   }

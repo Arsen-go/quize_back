@@ -1,9 +1,18 @@
-import { User } from '@/core/database/models/user.model';
+import { CookieOptions, Response } from 'express';
+
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '@/core/database/models/user.model';
 
 @Injectable()
 export class AuthService {
+  public tokenCookieOptions: CookieOptions = {
+    secure: process.env.NODE_ENV === 'production',
+    domain: process.env.SELF_URL,
+    httpOnly: true,
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+  };
+
   constructor(private readonly jwtService: JwtService) {}
 
   async validateUser(username: string, password: string): Promise<any> {
@@ -40,5 +49,13 @@ export class AuthService {
       secret: process.env.JWT_SECRET,
       expiresIn: process.env.EXPIRE_TIME,
     });
+  }
+
+  async refreshToken(res: Response, refreshToken: string): Promise<string> {
+    // const tokens = await this.ideaScaleService.refreshToken(refreshToken);
+
+    res.cookie('refreshToken', 'tokens.refresh_token', this.tokenCookieOptions);
+
+    return 'tokens.access_token';
   }
 }
