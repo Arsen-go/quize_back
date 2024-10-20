@@ -13,6 +13,7 @@ export class RefreshTokenGuard implements CanActivate {
     const req = GqlExecutionContext.create(context).getContext()?.req;
 
     const accessToken = req.headers.authorization?.split(' ')?.[1];
+
     if (!accessToken) {
       throw new UnauthorizedException('Unauthorized');
     }
@@ -28,6 +29,7 @@ export class RefreshTokenGuard implements CanActivate {
     }
 
     req.refreshToken = refreshToken;
+    req.accessToken = accessToken;
 
     return true;
   }

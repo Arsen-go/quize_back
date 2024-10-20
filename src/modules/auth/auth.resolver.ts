@@ -4,6 +4,7 @@ import { RefreshToken } from '@/decorators/refresh-token.decorator';
 import { RefreshTokenGuard } from '@/guards/refresh-token.guard';
 import { UseGuards } from '@nestjs/common/decorators';
 import { Response } from 'express';
+import { AccessToken } from '@/decorators/access-token.decorator';
 
 @Resolver()
 export class AuthResolver {
@@ -13,8 +14,9 @@ export class AuthResolver {
   async login(
     @Args('email') email: string,
     @Args('password') password: string,
+    @Context('res') res: Response,
   ): Promise<string> {
-    return this.authService.login({ email, password });
+    return this.authService.login({ email, password, res });
   }
 
   @UseGuards(RefreshTokenGuard)
@@ -22,7 +24,8 @@ export class AuthResolver {
   async refreshToken(
     @Context('res') res: Response,
     @RefreshToken() refreshToken: string,
+    @AccessToken() accessToken: string,
   ) {
-    return this.authService.refreshToken(res, refreshToken);
+    return this.authService.refreshToken({ res, refreshToken, accessToken });
   }
 }
