@@ -2,7 +2,7 @@ import { CookieOptions, Response } from 'express';
 
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '@/core/database/models/user.model';
+import { User } from '@/database/models/user.model';
 
 @Injectable()
 export class AuthService {

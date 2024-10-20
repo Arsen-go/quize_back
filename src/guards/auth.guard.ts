@@ -7,7 +7,7 @@ import {
 
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '@/core/database/models/user.model';
+import { User } from '@/database/models/user.model';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

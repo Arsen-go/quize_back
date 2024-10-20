@@ -1,11 +1,13 @@
-import { Quiz } from '@/core/database/models/quiz.model';
-import { Injectable } from '@nestjs/common';
 import { QuizInput, QuizUpdateInput } from './inputs/quiz.input';
-import { Question } from '@/core/database/models/question.model';
-import { User } from '@/core/database/models/user.model';
+
 import { AnswerQuizInput } from './inputs/answer-quiz.input';
-import { AnsweredUser } from '@/core/database/models/answered-user.model';
+import { AnsweredUser } from '@/database/models/answered-user.model';
+import { Injectable } from '@nestjs/common';
+import { Question } from '@/database/models/question.model';
+import { Quiz } from '@/database/models/quiz.model';
 import { RandomQuizType } from '@/constants/enums';
+import { User } from '@/database/models/user.model';
+
 const fs = require('fs');
 
 @Injectable()

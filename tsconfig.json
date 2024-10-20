@@ -20,27 +20,66 @@
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@Common/*": ["src/common/*"],
-      "@Constants/*": ["src/constants/*"],
-      "@Core/*": ["src/core/*"],
-      "@DatabaseModels/*": ["src/core/database/models/*"],
-      "@Database/*": ["src/core/database/*"],
-      "@Exception/*": ["src/exceptions/*"],
-      "@Middlewares/*": ["src/middlewares/*"],
-      "@Plugins/*": ["src/plugins/*"],
-      "@Scalars/*": ["src/scalars/*"],
-      "@Validations/*": ["src/validations/*"],
-      "@Decorators/*": ["src/decorators/*"],
-      "@Filters/*": ["src/filters/*"],
-      "@Gateway/*": ["src/gateway/*"],
-      "@Guards/*": ["src/guards/*"],
-      "@Inputs/*": ["src/inputs/*"],
-      "@Interceptors/*": ["src/interceptors/*"],
-      "@Models/*": ["src/models/*"],
-      "@Modules/*": ["src/modules/*"],
-      "@Pipes/*": ["src/pipes/*"],
-      "@Utils/*": ["src/utils/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@Common/*": [
+        "src/common/*"
+      ],
+      "@Constants/*": [
+        "src/constants/*"
+      ],
+      "@DatabaseModels/*": [
+        "src/database/models/*"
+      ],
+      "@Database/*": [
+        "src/database/*"
+      ],
+      "@Exception/*": [
+        "src/exceptions/*"
+      ],
+      "@Middlewares/*": [
+        "src/middlewares/*"
+      ],
+      "@Plugins/*": [
+        "src/plugins/*"
+      ],
+      "@Scalars/*": [
+        "src/scalars/*"
+      ],
+      "@Validations/*": [
+        "src/validations/*"
+      ],
+      "@Decorators/*": [
+        "src/decorators/*"
+      ],
+      "@Filters/*": [
+        "src/filters/*"
+      ],
+      "@Gateway/*": [
+        "src/gateway/*"
+      ],
+      "@Guards/*": [
+        "src/guards/*"
+      ],
+      "@Inputs/*": [
+        "src/inputs/*"
+      ],
+      "@Interceptors/*": [
+        "src/interceptors/*"
+      ],
+      "@Models/*": [
+        "src/models/*"
+      ],
+      "@Modules/*": [
+        "src/modules/*"
+      ],
+      "@Pipes/*": [
+        "src/pipes/*"
+      ],
+      "@Utils/*": [
+        "src/utils/*"
+      ]
     }
   }
 }
