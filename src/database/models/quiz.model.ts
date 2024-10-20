@@ -13,8 +13,8 @@ import { User } from './user.model';
 interface CreateQuizAttributes {
   ownerId: number;
   title: string;
-  description: string | null;
-  duration?: number | null;
+  description: string;
+  category?: string;
 }
 
 @Table({ tableName: 'quizzes', timestamps: true })
@@ -27,8 +27,11 @@ export class Quiz extends BaseModel<Quiz, CreateQuizAttributes> {
   @Column({ type: DataType.STRING })
   title!: string;
 
+  @Column({ type: DataType.STRING, allowNull: true })
+  category?: string;
+
   @Column({ type: DataType.TEXT({ length: 'long' }), allowNull: true })
-  description?: string | null;
+  description?: string;
 
   @BelongsTo(() => User, {
     foreignKey: 'ownerId',

@@ -1,21 +1,9 @@
 import { InputType } from '@nestjs/graphql';
-
-@InputType()
-class QuestionInput {
-  questionText!: string;
-  options!: string[];
-  correctAnswer!: number;
-}
+import { QuestionInput } from './question.input';
 
 @InputType()
 export class QuizInput {
-  name!: string;
-  description!: string;
-  questions!: QuestionInput[];
-}
-
-@InputType()
-export class QuizUpdateInput {
-  name?: string | null;
-  description?: string | null;
+  title: string;
+  description: string;
+  questions: QuestionInput[];
 }

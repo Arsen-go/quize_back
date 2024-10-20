@@ -1,33 +1,59 @@
-import { QuizInput, QuizUpdateInput } from './inputs/quiz.input';
-
 import { AnswerQuizInput } from './inputs/answer-quiz.input';
+import { Choice } from '@/database/models/choice.model';
 import { Injectable } from '@nestjs/common';
 import { Question } from '@/database/models/question.model';
 import { Quiz } from '@/database/models/quiz.model';
+import { QuizInput } from './inputs/quiz.input';
 import { RandomQuizType } from '@/constants/enums';
+import { Transaction } from 'sequelize';
 import { User } from '@/database/models/user.model';
 
 const fs = require('fs');
 
 @Injectable()
 export class QuizService {
-  async create({ data, user }: { data: QuizInput; user: User }): Promise<Quiz> {
-    const { description, name, questions } = data;
-
-    const quiz: Quiz = await Quiz.create({
-      description,
-      title: name,
-      ownerId: user.id,
-    });
-
-    await Question.bulkCreate(
-      questions.map((q) => ({
-        correctAnswer: q.correctAnswer,
-        options: q.options,
-        questionText: q.questionText,
-        quizId: quiz.id,
-      })),
+  async createQuiz({
+    quizInput: { description, questions, title },
+    user,
+    transaction,
+  }: {
+    quizInput: QuizInput;
+    user: User;
+    transaction: Transaction;
+  }): Promise<Quiz> {
+    const quiz: Quiz = await Quiz.create(
+      {
+        title,
+        description,
+        ownerId: user.id,
+        category: 'MATH', // TODO quiz categories
+      },
+      { transaction },
     );
+
+    // Iterate over the questions and save them
+    for (const { choices, text, imageId } of questions) {
+      const question: Question = await Question.create(
+        {
+          text,
+          imageId,
+          quizId: quiz.id,
+        },
+        { transaction },
+      );
+
+      // Iterate over the choices and save them
+      for (const { value, imageId } of choices) {
+        await Choice.create(
+          {
+            value,
+            imageId,
+            questionId: question.id,
+          },
+          { transaction },
+        );
+      }
+    }
 
     return quiz;
   }
@@ -89,18 +115,18 @@ export class QuizService {
 
     const newQuiz: Quiz = await Quiz.create({
       description: quiz.description,
-      title: quiz.name,
+      title: quiz.title,
       ownerId: user.id,
     });
 
-    await Question.bulkCreate(
-      quiz.questions.map((q) => ({
-        correctAnswer: q.correctAnswer,
-        options: q.options,
-        questionText: q.questionText,
-        quizId: newQuiz.id,
-      })),
-    );
+    // await Question.bulkCreate(
+    //   quiz.questions.map((q) => ({
+    //     correctAnswer: q.correctAnswer,
+    //     options: q.options,
+    //     questionText: q.questionText,
+    //     quizId: newQuiz.id,
+    //   })),
+    // );
 
     return newQuiz;
   }
@@ -120,26 +146,26 @@ export class QuizService {
     return score;
   }
 
-  async updateQuiz({
-    data,
-    id,
-  }: {
-    data: QuizUpdateInput;
-    id: number;
-  }): Promise<Quiz | null> {
-    const quiz: Quiz = await Quiz.findByPk(id);
-    if (!quiz) return null;
+  // async updateQuiz({
+  //   data,
+  //   id,
+  // }: {
+  //   data: QuizUpdateInput;
+  //   id: number;
+  // }): Promise<Quiz | null> {
+  //   const quiz: Quiz = await Quiz.findByPk(id);
+  //   if (!quiz) return null;
 
-    const { description, name } = data;
+  //   const { description, name } = data;
 
-    const entity: any = {};
-    if (name) entity.name = name;
-    if (description) entity.description = description;
+  //   const entity: any = {};
+  //   if (name) entity.name = name;
+  //   if (description) entity.description = description;
 
-    await quiz.update(entity);
+  //   await quiz.update(entity);
 
-    return quiz;
-  }
+  //   return quiz;
+  // }
 
   async delete({ id }: { id: number }): Promise<boolean> {
     const quiz: Quiz = await Quiz.findByPk(id);
@@ -150,9 +176,8 @@ export class QuizService {
     return true;
   }
 
-  async getUserQuizzes({ user }): Promise<Quiz[]> {
-    // TODO
-    return Quiz.findAll({ include: [{ all: true }] });
+  async getUserQuizzes({ user }: { user: User }): Promise<Quiz[]> {
+    return Quiz.findAll({ where: { ownerId: user.id } });
   }
 
   async findOne(id: number): Promise<Quiz | null> {

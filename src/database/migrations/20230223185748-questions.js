@@ -13,6 +13,16 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
+      imageId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'attachments',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
       quizId: {
         type: Sequelize.INTEGER,
         allowNull: false,

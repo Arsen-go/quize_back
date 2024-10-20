@@ -19,6 +19,16 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
+      imageId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'attachments',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
       type: {
         type: Sequelize.STRING,
         allowNull: false,

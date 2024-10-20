@@ -7,15 +7,18 @@ import {
   ResolveField,
   Parent,
 } from '@nestjs/graphql';
-import { QuizInput, QuizUpdateInput } from './inputs/quiz.input';
+import { QuizInput } from './inputs/quiz.input';
 import { QuizService } from './quiz.service';
 import { User } from '@/database/models/user.model';
 import { Question } from '@/database/models/question.model';
 import { CurrentUser } from '@/decorators/current-user.decorator';
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@/guards/auth.guard';
 import { AnswerQuizInput } from './inputs/answer-quiz.input';
 import { RandomQuizType } from '@/constants/enums';
+import { TransactionInterceptor } from '@/interceptors/transaction.interceptor';
+import { TransactionParam } from '@/decorators/transaction.decorator';
+import { Transaction } from 'sequelize';
 
 @Resolver(() => Quiz)
 export class QuizResolver {
@@ -38,12 +41,14 @@ export class QuizResolver {
   // }
 
   @UseGuards(AuthGuard)
+  @UseInterceptors(TransactionInterceptor)
   @Mutation(() => Quiz)
   async createQuiz(
     @CurrentUser() user: User,
-    @Args('data') data: QuizInput,
+    @Args('quizInput') quizInput: QuizInput,
+    @TransactionParam() transaction: Transaction,
   ): Promise<Quiz> {
-    return this.quizService.create({ data, user });
+    return this.quizService.createQuiz({ quizInput, user, transaction });
   }
 
   @UseGuards(AuthGuard)
@@ -68,13 +73,13 @@ export class QuizResolver {
     return this.quizService.answerQuiz({ answerInput, user });
   }
 
-  @Mutation(() => Quiz, { nullable: true })
-  async updateQuiz(
-    @Args('id') id: number,
-    @Args('data') data: QuizUpdateInput,
-  ): Promise<Quiz | null> {
-    return this.quizService.updateQuiz({ data, id });
-  }
+  // @Mutation(() => Quiz, { nullable: true })
+  // async updateQuiz(
+  //   @Args('id') id: number,
+  //   @Args('data') data: QuizUpdateInput,
+  // ): Promise<Quiz | null> {
+  //   return this.quizService.updateQuiz({ data, id });
+  // }
 
   @Mutation(() => Boolean)
   async deleteQuiz(@Args('id') id: number): Promise<boolean> {
