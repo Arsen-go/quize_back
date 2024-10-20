@@ -2,12 +2,22 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('user_answers', {
+    await queryInterface.createTable('attempt_answers', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
+      },
+      studentAttemptId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'student_attempts',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       questionId: {
         type: Sequelize.INTEGER,
@@ -19,13 +29,15 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      answer: {
+      choiceId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+        references: {
+          model: 'choices',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -41,6 +53,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('user_answers');
+    await queryInterface.dropTable('attempt_answers');
   },
 };

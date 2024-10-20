@@ -1,7 +1,6 @@
 import { QuizInput, QuizUpdateInput } from './inputs/quiz.input';
 
 import { AnswerQuizInput } from './inputs/answer-quiz.input';
-import { AnsweredUser } from '@/database/models/answered-user.model';
 import { Injectable } from '@nestjs/common';
 import { Question } from '@/database/models/question.model';
 import { Quiz } from '@/database/models/quiz.model';
@@ -17,7 +16,7 @@ export class QuizService {
 
     const quiz: Quiz = await Quiz.create({
       description,
-      name,
+      title: name,
       ownerId: user.id,
     });
 
@@ -90,7 +89,7 @@ export class QuizService {
 
     const newQuiz: Quiz = await Quiz.create({
       description: quiz.description,
-      name: quiz.name,
+      title: quiz.name,
       ownerId: user.id,
     });
 
@@ -116,7 +115,7 @@ export class QuizService {
     // TODO
     const { answers, quizId, userName, score } = answerInput;
 
-    await AnsweredUser.create({ quizId, score, userName });
+    // await AnsweredUser.create({ quizId, score, userName });
 
     return score;
   }
@@ -160,17 +159,8 @@ export class QuizService {
     return Quiz.findByPk(id, { include: [{ all: true }] });
   }
 
-  async getAnsweredUsers({
-    quizId,
-  }: {
-    quizId: number;
-  }): Promise<AnsweredUser[]> {
-    return AnsweredUser.findAll({
-      where: {
-        quizId,
-      },
-      order: [['score', 'DESC']],
-    });
+  async getAnsweredUsers({ quizId }: { quizId: number }): Promise<string[]> {
+    return ['us1', 'us2'];
   }
 
   async getQuizQuestions({ quizId }: { quizId: number }): Promise<Question[]> {

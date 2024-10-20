@@ -2,30 +2,30 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('answered_users', {
+    await queryInterface.createTable('quizzes', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
       },
-      quizId: {
+      ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'quizzes',
+          model: 'users',
           key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      userName: {
+      title: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      score: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+      description: {
+        type: Sequelize.TEXT({ length: 'long' }),
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -41,6 +41,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('answered_users');
+    await queryInterface.dropTable('quizzes');
   },
 };

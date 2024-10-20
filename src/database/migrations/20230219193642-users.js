@@ -25,6 +25,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      role: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: 'TEACHER',
+      },
       createdAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
@@ -54,5 +59,5 @@ module.exports = {
     await queryInterface.removeIndex('users', 'idx_user_email');
     await queryInterface.removeIndex('users', 'idx_user_name');
     await queryInterface.dropTable('users');
-  }
+  },
 };

@@ -1,8 +1,10 @@
-import { BaseModel } from './base.model';
+import * as bcrypt from 'bcryptjs';
+
 import { BeforeCreate, Column, DataType, Table } from 'sequelize-typescript';
 import { Field, ObjectType } from '@nestjs/graphql';
+
+import { BaseModel } from './base.model';
 import { generateRandomString } from '@/guards/utils/generate-random-string';
-import * as bcrypt from 'bcryptjs';
 
 interface CreateUserAttr {
   email: string;
@@ -44,6 +46,13 @@ export class User extends BaseModel<User, CreateUserAttr> {
     comment: 'This is the user nickname and will be unique',
   })
   name: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    defaultValue: 'TEACHER',
+  })
+  role: string;
 
   @Column({ type: DataType.STRING })
   password: string;

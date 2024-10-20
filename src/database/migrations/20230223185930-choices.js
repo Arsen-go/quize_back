@@ -2,36 +2,36 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('quizzes', {
+    await queryInterface.createTable('choices', {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
       },
-      ownerId: {
+      questionId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: {
-            tableName: 'users',
-          },
+          model: 'questions',
           key: 'id',
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      name: {
+      type: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: '',
       },
-      description: {
-        type: Sequelize.TEXT({ length: 'long' }),
-        allowNull: true,
+      value: {
+        type: Sequelize.TEXT,
+        allowNull: false,
       },
-      duration: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
+      isCorrect: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -47,6 +47,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('quizzes');
+    await queryInterface.dropTable('choices');
   },
 };

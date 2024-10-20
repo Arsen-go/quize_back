@@ -9,7 +9,7 @@ import {
 import { Server, Socket } from 'socket.io';
 
 import { SocketService } from './socket.service';
-import { User } from '@/core/database/models/user.model';
+import { User } from '@/database/models/user.model';
 
 export type SocketWithUser = Socket & { user: User };
 

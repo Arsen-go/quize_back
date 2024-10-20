@@ -1,35 +1,26 @@
-// import { QueryCounts } from '@/constants/query-counts';
-// import { createPerformanceLog } from '@/utils/create-performance-log';
-// import {
-//   Injectable,
-//   NestInterceptor,
-//   ExecutionContext,
-//   CallHandler,
-// } from '@nestjs/common';
-// import { GqlExecutionContext } from '@nestjs/graphql';
-// import { Observable } from 'rxjs';
-// import { tap } from 'rxjs/operators';
+import {
+  CallHandler,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+} from '@nestjs/common';
 
-// @Injectable()
-// export class LoggingInterceptor implements NestInterceptor {
-//   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-//     const ctx = GqlExecutionContext.create(context);
-//     const req = ctx.getContext().req;
+import { GqlExecutionContext } from '@nestjs/graphql';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-//     return next.handle().pipe(
-//       tap((res) => {
-//         const apiName = ctx.getArgByIndex(3)?.fieldName;
-//         const responseTime = Date.now() - req.startTime;
-//         console.log(`Request ends... ${responseTime}ms`);
+@Injectable()
+export class LoggingInterceptor implements NestInterceptor {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const ctx = GqlExecutionContext.create(context);
+    const req = ctx.getContext().req;
 
-//         createPerformanceLog({
-//           queryCount: res.queryCount ? res.queryCount : QueryCounts[apiName],
-//           responseTime,
-//           user: req.user,
-//           path: apiName || '',
-//           method: req.method,
-//         }).catch(console.error);
-//       }),
-//     );
-//   }
-// }
+    return next.handle().pipe(
+      tap((res) => {
+        const apiName = ctx.getArgByIndex(3)?.fieldName;
+        const responseTime = performance.now() - req.requestStartTime;
+        console.log(`Request ends...${apiName} ${responseTime}ms`);
+      }),
+    );
+  }
+}

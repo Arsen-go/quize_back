@@ -1,4 +1,4 @@
-import { Quiz } from '@/core/database/models/quiz.model';
+import { Quiz } from '@/database/models/quiz.model';
 import {
   Resolver,
   Query,
@@ -9,13 +9,12 @@ import {
 } from '@nestjs/graphql';
 import { QuizInput, QuizUpdateInput } from './inputs/quiz.input';
 import { QuizService } from './quiz.service';
-import { User } from '@/core/database/models/user.model';
-import { Question } from '@/core/database/models/question.model';
+import { User } from '@/database/models/user.model';
+import { Question } from '@/database/models/question.model';
 import { CurrentUser } from '@/decorators/current-user.decorator';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@/guards/auth.guard';
 import { AnswerQuizInput } from './inputs/answer-quiz.input';
-import { AnsweredUser } from '@/core/database/models/answered-user.model';
 import { RandomQuizType } from '@/constants/enums';
 
 @Resolver(() => Quiz)
@@ -33,10 +32,10 @@ export class QuizResolver {
     return this.quizService.findOne(id);
   }
 
-  @Query(() => [AnsweredUser])
-  async answeredUsers(@Args('quizId') quizId: number): Promise<AnsweredUser[]> {
-    return this.quizService.getAnsweredUsers({ quizId });
-  }
+  // @Query(() => [AnsweredUser])
+  // async answeredUsers(@Args('quizId') quizId: number): Promise<AnsweredUser[]> {
+  //   return this.quizService.getAnsweredUsers({ quizId });
+  // }
 
   @UseGuards(AuthGuard)
   @Mutation(() => Quiz)
